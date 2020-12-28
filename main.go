@@ -1,9 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/huazhengchao/wanzi_blog/config"
+)
 
 func main() {
+	// 初始化配置
+	config.Init()
 
-	fmt.Println("hello world")
+	fmt.Println("golang大法牛逼~")
 }
 
