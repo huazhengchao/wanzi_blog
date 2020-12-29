@@ -13,11 +13,17 @@ type Article struct {
 }
 
 // 文章列表
-func (a *Article) List(page int) ([]Article, int64) {
+func (a *Article) List(page int, title string) ([]Article, int64) {
 	var articles []Article
 	offset := (page - 1) * 10
 	var total int64
-	DB.Offset(offset).Limit(10).Order("created_at desc").Find(&articles).Count(&total)
+	DB.Where("title LIKE ?", "%" + title + "%").
+	   Offset(offset).
+	   Limit(10).
+	   Order("created_at desc").
+	   Omit("content").
+	   Find(&articles).
+	   Count(&total)
 	return articles, total
 }
 

@@ -14,10 +14,11 @@ var articlesModel model.Article
 // 文章列表
 func (a *ArticleController) List(c *gin.Context) {
 	page, err := strconv.Atoi(c.DefaultPostForm("page", "1"))
+	title := c.DefaultPostForm("title", "")
 	if err != nil {
 		c.JSON(200, ErrorResponse(ParamError))
 	}
-	list, total := articlesModel.List(page)
+	list, total := articlesModel.List(page, title)
 	c.JSON(200, SuccessResponse(Success, int(total), list))
 }
 
