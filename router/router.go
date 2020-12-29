@@ -16,7 +16,9 @@ func NewRouter() *gin.Engine {
 	router.POST("/detail", articleController.Detail)
 
 	articleMessageController := new(api.ArticleMessageController)
-	// 文章留言接口
+	// 文章留言列表接口
 	router.POST("/messageList", articleMessageController.List)
+	// 文章留言新增接口
+	router.POST("/messageAdd", articleMessageController.Add)
 	return router
 }

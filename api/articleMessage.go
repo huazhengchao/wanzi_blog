@@ -20,3 +20,16 @@ func (a *ArticleMessageController) List(c *gin.Context) {
 	list := articleMessageModel.List(id)
 	c.JSON(200, SuccessResponse(Success, 0, list))
 }
+
+// 文章留言新增
+func (a *ArticleMessageController) Add(c *gin.Context) {
+	pid, err := strconv.Atoi(c.PostForm("pid"))
+	if err != nil {
+		c.JSON(200, ErrorResponse(ParamError))
+	}
+	name := c.PostForm("name")
+	content := c.PostForm("content")
+
+	articleMessageModel.Add(pid, name, content)
+	c.JSON(200, SuccessResponse(Success, 0))
+}
