@@ -12,6 +12,7 @@ func NewRouter() *gin.Engine{
 	articleController := new(api.ArticleController)
 	// 文章列表接口
 	router.POST("/getList", articleController.List)
-
+	// 文章详情接口
+	router.POST("/detail", articleController.Detail)
 	return router
 }

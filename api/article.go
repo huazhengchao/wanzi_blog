@@ -20,3 +20,13 @@ func (a *ArticleController) List(c *gin.Context) {
 	list, total := articlesModel.List(page)
 	c.JSON(200, SuccessResponse(Success, int(total), list))
 }
+
+// 文章详情
+func (a *ArticleController) Detail(c *gin.Context) {
+	id, err := strconv.Atoi(c.PostForm("id"))
+	if err != nil {
+		c.JSON(200, ErrorResponse(ParamError))
+	}
+	data := articlesModel.Detail(id)
+	c.JSON(200, SuccessResponse(Success, 0, data))
+}
