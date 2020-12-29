@@ -5,7 +5,7 @@ import (
 	"github.com/huazhengchao/wanzi_blog/api"
 )
 
-func NewRouter() *gin.Engine{
+func NewRouter() *gin.Engine {
 
 	router := gin.Default()
 
@@ -14,5 +14,9 @@ func NewRouter() *gin.Engine{
 	router.POST("/getList", articleController.List)
 	// 文章详情接口
 	router.POST("/detail", articleController.Detail)
+
+	articleMessageController := new(api.ArticleMessageController)
+	// 文章留言接口
+	router.POST("/messageList", articleMessageController.List)
 	return router
 }
