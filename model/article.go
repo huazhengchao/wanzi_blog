@@ -6,25 +6,26 @@ import (
 
 type Article struct {
 	Id int `json:"id"`
+	Pid int `json:"pid"`
 	Title string `json:"title"`
+	Desc string `json:"desc"`
 	Img string `json:"img"`
 	Content string `json:"content"`
+	View int `json:"view"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // 文章列表
-func (a *Article) List(page int, title string) ([]Article, int64) {
+func (a *Article) List(page int, title string) ([]Article) {
 	var articles []Article
 	offset := (page - 1) * 10
-	var total int64
 	DB.Where("title LIKE ?", "%" + title + "%").
 	   Offset(offset).
-	   Limit(10).
+	   Limit(5).
 	   Order("created_at desc").
 	   Omit("content").
-	   Find(&articles).
-	   Count(&total)
-	return articles, total
+	   Find(&articles)
+	return articles
 }
 
 // 文章详情

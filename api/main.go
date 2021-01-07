@@ -16,12 +16,11 @@ type Response struct {
 	Code  int         `json:"code"`
 	Data  interface{} `json:"data,omitempty"`
 	Msg   string      `json:"msg"`
-	Total int         `json:"total"`
 	Error string      `json:"error,omitempty"`
 }
 
 // 成功信息
-func SuccessResponse(msg string, total int, data ...interface{}) Response {
+func SuccessResponse(msg string, data ...interface{}) Response {
 	var newData interface{}
 	if len(data) > 0 {
 		newData = data[0]
@@ -29,10 +28,9 @@ func SuccessResponse(msg string, total int, data ...interface{}) Response {
 		newData = ""
 	}
 	return Response{
-		Code:  10000,
+		Code:  0,
 		Data:  newData,
 		Msg:   msg,
-		Total: total,
 		Error: "",
 	}
 }

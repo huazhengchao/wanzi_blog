@@ -16,7 +16,7 @@ type ArticleMessage struct {
 func (a *ArticleMessage) List(id int) []ArticleMessage {
 	var articleMessage []ArticleMessage
 	DB.Where("pid = ?", id).
-		Order("created_at desc").
+		Order("id").
 		Find(&articleMessage)
 	return articleMessage
 }

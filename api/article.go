@@ -18,8 +18,8 @@ func (a *ArticleController) List(c *gin.Context) {
 	if err != nil {
 		c.JSON(200, ErrorResponse(ParamError))
 	}
-	list, total := articlesModel.List(page, title)
-	c.JSON(200, SuccessResponse(Success, int(total), list))
+	list := articlesModel.List(page, title)
+	c.JSON(200, SuccessResponse(Success, list))
 }
 
 // 文章详情
